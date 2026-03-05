@@ -14,27 +14,35 @@ import {
     LogOut,
     Menu,
     X,
-    Home
+    Home,
+    Search,
+    Filter,
+    Plus,
+    ChevronLeft,
+    ChevronRight,
+    Settings
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/components/auth/AuthContext';
 
-interface AdminSidebarProps {
+interface SidebarProps {
     isOpen: boolean;
     onClose: () => void;
+    isCollapsed?: boolean;
+    setIsCollapsed?: (collapsed: boolean) => void;
 }
 
-const menuItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '/admin' },
-    { icon: Users, label: 'Residents', href: '/admin/residents' },
-    { icon: CreditCard, label: 'Billing', href: '/admin/billing' },
-    { icon: Wrench, label: 'Maintenance', href: '/admin/maintenance' },
-    { icon: Palmtree, label: 'Amenities', href: '/admin/amenities' },
-    { icon: Shield, label: 'Security', href: '/admin/security' },
-    { icon: Megaphone, label: 'Communication', href: '/admin/communication' },
+const navItems = [
+    { icon: LayoutDashboard, name: 'Dashboard', href: '/admin' },
+    { icon: Users, name: 'Residents', href: '/admin/residents' },
+    { icon: CreditCard, name: 'Billing', href: '/admin/billing' },
+    { icon: Wrench, name: 'Maintenance', href: '/admin/maintenance' },
+    { icon: Palmtree, name: 'Amenities', href: '/admin/amenities' },
+    { icon: Shield, name: 'Security', href: '/admin/security' },
+    { icon: Megaphone, name: 'Communication', href: '/admin/communication' },
 ];
 
-export const AdminSidebar: React.FC<AdminSidebarProps> = ({ isOpen, onClose }) => {
+export const AdminSidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isCollapsed, setIsCollapsed }) => {
     const pathname = usePathname();
     const { logout } = useAuth();
 
@@ -49,21 +57,40 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ isOpen, onClose }) =
             )}
 
             {/* Sidebar */}
-            <aside className={cn(
-                "fixed top-0 left-0 h-full w-[280px] sidebar-gradient border-r border-black/5 z-50 transition-all duration-300 ease-in-out transform",
-                isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-            )}>
-                <div className="flex flex-col h-full p-6">
+            <aside
+                className={cn(
+                    "fixed top-0 left-0 z-50 h-full sidebar-gradient border-r border-slate-200 transition-all duration-300 ease-in-out lg:translate-x-0",
+                    isOpen ? "translate-x-0" : "-translate-x-full",
+                    isCollapsed ? "w-[80px]" : "w-[280px]"
+                )}
+            >
+                {/* Collapse Toggle - Desktop Only */}
+                <button
+                    onClick={() => setIsCollapsed?.(!isCollapsed)}
+                    className="hidden lg:flex absolute -right-3 top-24 w-6 h-6 bg-white border border-slate-200 rounded-full items-center justify-center text-slate-400 hover:text-gold-start shadow-sm z-50 transition-transform group"
+                >
+                    {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+                </button>
+
+                <div className={cn(
+                    "flex flex-col h-full py-8 transition-all duration-300",
+                    isCollapsed ? "px-4" : "px-6"
+                )}>
                     {/* Header */}
-                    <div className="flex items-center justify-between mb-10">
+                    <div className={cn(
+                        "flex items-center justify-between mb-10 transition-all duration-300",
+                        isCollapsed ? "justify-center" : "justify-between"
+                    )}>
                         <Link href="/admin" className="flex items-center gap-3">
-                            <div className="w-10 h-10 gold-gradient rounded-xl flex items-center justify-center text-black shadow-lg shadow-gold-start/20">
-                                <Shield size={24} strokeWidth={2.5} />
+                            <div className="w-10 h-10 gold-gradient rounded-xl flex items-center justify-center text-black shadow-lg shadow-gold-start/20 shrink-0">
+                                <LayoutDashboard size={24} strokeWidth={2.5} />
                             </div>
-                            <div>
-                                <h2 className="text-slate-900 text-xl font-extrabold leading-none tracking-tight">ADMIN</h2>
-                                <p className="text-[10px] uppercase tracking-[0.2em] font-bold gold-text-gradient text-accent">Control Center</p>
-                            </div>
+                            {!isCollapsed && (
+                                <div className="animate-in fade-in slide-in-from-left-2 duration-300">
+                                    <h2 className="text-slate-900 text-lg font-extrabold leading-tight tracking-tight uppercase">Alys Homes LTD</h2>
+                                    <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">Admin Control</p>
+                                </div>
+                            )}
                         </Link>
                         <button onClick={onClose} className="lg:hidden text-slate-400 hover:text-slate-900 transition-colors">
                             <X size={24} />
@@ -71,50 +98,70 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ isOpen, onClose }) =
                     </div>
 
                     {/* Navigation */}
-                    <nav className="flex-1 space-y-1.5 overflow-y-auto pr-2 custom-scrollbar">
-                        <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-4 ml-4">Management</p>
-                        {menuItems.map((item) => {
+                    <nav className="flex-grow space-y-1">
+                        {!isCollapsed && (
+                            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 mb-4 ml-3 animate-in fade-in duration-300">Management Panel</p>
+                        )}
+                        {navItems.map((item) => {
                             const isActive = pathname === item.href;
+                            const Icon = item.icon;
                             return (
                                 <Link
                                     key={item.href}
                                     href={item.href}
-                                    onClick={() => onClose()}
+                                    title={isCollapsed ? item.name : ""}
                                     className={cn(
-                                        "flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 group relative overflow-hidden",
+                                        "flex items-center gap-3 py-3 rounded-xl transition-all duration-200 group relative",
+                                        isCollapsed ? "px-0 justify-center" : "px-4",
                                         isActive
-                                            ? "bg-accent/10 text-accent font-semibold"
+                                            ? "bg-gold-start/10 text-gold-start font-semibold"
                                             : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
                                     )}
                                 >
-                                    {isActive && (
-                                        <div className="absolute left-0 top-0 w-1 h-full bg-accent" />
-                                    )}
-                                    <item.icon size={20} className={cn(
-                                        "transition-transform duration-200 group-hover:scale-110",
-                                        isActive ? "text-accent" : "text-slate-300 group-hover:text-slate-600"
+                                    <Icon size={20} className={cn(
+                                        "transition-colors shrink-0",
+                                        isActive ? "text-gold-start" : "text-slate-400 group-hover:text-slate-600"
                                     )} />
-                                    <span className="text-sm">{item.label}</span>
+                                    {!isCollapsed && (
+                                        <span className="text-sm animate-in fade-in slide-in-from-left-2 duration-300">{item.name}</span>
+                                    )}
+                                    {isActive && (
+                                        <div className={cn(
+                                            "absolute left-0 w-1 h-6 bg-gold-start rounded-r-full",
+                                            isCollapsed && "hidden"
+                                        )} />
+                                    )}
                                 </Link>
                             );
                         })}
                     </nav>
 
                     {/* Footer */}
-                    <div className="mt-auto pt-6 border-t border-slate-100 space-y-2">
+                    <div className="mt-auto pt-6 border-t border-slate-200 grid gap-2">
                         <Link
-                            href="/"
-                            className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-all duration-200"
+                            href="/admin/settings"
+                            title={isCollapsed ? "Settings" : ""}
+                            className={cn(
+                                "flex items-center gap-3 py-3 rounded-xl transition-all duration-200 group",
+                                isCollapsed ? "px-0 justify-center" : "px-4",
+                                pathname === '/admin/settings'
+                                    ? "bg-gold-start/10 text-gold-start font-semibold"
+                                    : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
+                            )}
                         >
-                            <Home size={20} className="text-slate-300 group-hover:text-slate-600" />
-                            <span className="text-sm">Resident View</span>
+                            <Settings size={20} className="shrink-0" />
+                            {!isCollapsed && <span className="text-sm">Settings</span>}
                         </Link>
                         <button
                             onClick={logout}
-                            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:text-red-600 hover:bg-red-50 transition-all duration-200 border border-transparent hover:border-red-100"
+                            title={isCollapsed ? "Sign Out" : ""}
+                            className={cn(
+                                "flex items-center gap-3 py-3 rounded-xl text-red-500 hover:text-red-600 hover:bg-red-50 transition-all duration-200 mt-2",
+                                isCollapsed ? "px-0 justify-center" : "px-4"
+                            )}
                         >
-                            <LogOut size={20} />
-                            <span className="text-sm font-bold">Sign Out</span>
+                            <LogOut size={20} className="shrink-0" />
+                            {!isCollapsed && <span className="text-sm">Sign Out</span>}
                         </button>
                     </div>
                 </div>

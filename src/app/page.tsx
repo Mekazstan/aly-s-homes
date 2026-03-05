@@ -17,8 +17,8 @@ export default function DashboardPage() {
     <div className="space-y-10">
       {/* Welcome Header */}
       <div>
-        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Welcome back, Resident</h1>
-        <p className="text-slate-500 mt-2 font-medium">Here is what's happening in your estate today.</p>
+        <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Dashboard</h1>
+        <p className="text-slate-500 mt-2 font-medium">Welcome back, Resident. Here is your estate overview.</p>
       </div>
 
       {/* Hero Stats */}

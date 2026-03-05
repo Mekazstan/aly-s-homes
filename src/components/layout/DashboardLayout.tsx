@@ -8,6 +8,7 @@ import {
     Menu,
     ChevronDown
 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export default function DashboardLayout({
     children,
@@ -15,12 +16,21 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     return (
         <div className="flex h-screen bg-[#F8FAFC]">
-            <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+            <Sidebar
+                isOpen={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+                isCollapsed={isCollapsed}
+                setIsCollapsed={setIsCollapsed}
+            />
 
-            <div className="flex-1 flex flex-col min-w-0 overflow-hidden lg:pl-[280px]">
+            <div className={cn(
+                "flex-1 flex flex-col min-w-0 overflow-hidden transition-all duration-300",
+                isCollapsed ? "lg:pl-[80px]" : "lg:pl-[280px]"
+            )}>
                 {/* Header */}
                 <header className="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-30">
                     <div className="flex items-center gap-4 flex-1">

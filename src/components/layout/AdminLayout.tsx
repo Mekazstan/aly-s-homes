@@ -7,8 +7,11 @@ import {
     Bell,
     Menu,
     ChevronDown,
-    Settings
+    Settings,
+    User
 } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useAuth } from '@/components/auth/AuthContext';
 
 export default function AdminLayout({
     children,
@@ -16,12 +19,21 @@ export default function AdminLayout({
     children: React.ReactNode;
 }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     return (
-        <div className="flex h-screen bg-background text-foreground transition-colors duration-300">
-            <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <div className="flex h-screen bg-[#F8FAFC]">
+            <AdminSidebar
+                isOpen={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+                isCollapsed={isCollapsed}
+                setIsCollapsed={setIsCollapsed}
+            />
 
-            <div className="flex-1 flex flex-col min-w-0 overflow-hidden lg:pl-[280px]">
+            <div className={cn(
+                "flex-1 flex flex-col min-w-0 overflow-hidden transition-all duration-300",
+                isCollapsed ? "lg:pl-[80px]" : "lg:pl-[280px]"
+            )}>
                 {/* Header */}
                 <header className="h-20 glass-effect-dark border-b border-slate-200 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-30">
                     <div className="flex items-center gap-4 flex-1">

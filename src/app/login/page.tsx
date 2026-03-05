@@ -29,10 +29,10 @@ export default function LoginPage() {
                     <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-[#d4af35] to-[#aa8b2c] mb-6 shadow-[0_0_40px_rgba(212,175,53,0.3)] rotate-3">
                         <ShieldCheck className="text-black w-10 h-10 -rotate-3" />
                     </div>
-                    <h1 className="text-4xl font-bold text-slate-900 mb-2">
-                        Welcome Home
+                    <h1 className="text-4xl font-bold text-slate-900 mb-2 leading-tight">
+                        Alys Homes LTD
                     </h1>
-                    <p className="text-slate-500">Access your luxury estate dashboard</p>
+                    <p className="text-slate-500 font-medium">Access your premium resident dashboard</p>
                 </div>
 
                 <div className="glass-effect-dark p-8 rounded-2xl border border-slate-200 shadow-xl">
@@ -94,8 +94,8 @@ export default function LoginPage() {
                     <Home className="w-5 h-5" />
                     <div className="h-px w-12 bg-current" />
                 </div>
-                <p className="text-center mt-4 text-[10px] uppercase tracking-widest text-slate-400 font-bold">
-                    Abuja Luxury Estates · Secure Access
+                <p className="text-center mt-4 text-[10px] uppercase tracking-widest text-slate-400 font-black">
+                    Alys Homes LTD · Secure Access
                 </p>
             </div>
         </div>

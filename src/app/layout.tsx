@@ -11,7 +11,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Abuja Luxury Estates | Resident Portal",
+  title: "Alys Homes LTD",
   description: "Elite property management portal for Abuja's premier residences.",
 };
 

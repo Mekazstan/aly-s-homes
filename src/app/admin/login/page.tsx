@@ -79,8 +79,8 @@ export default function AdminLoginPage() {
                     </p>
                 </div>
 
-                <p className="text-center mt-12 text-[10px] uppercase tracking-widest text-slate-300 font-bold">
-                    System Version 2.0.4 · ALE Admin
+                <p className="text-center mt-12 text-[10px] uppercase tracking-widest text-slate-300 font-black">
+                    Alys Homes LTD · Secure Access
                 </p>
             </div>
         </div>

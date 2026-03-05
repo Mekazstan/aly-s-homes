@@ -112,7 +112,7 @@ export default function MaintenancePage() {
                         <p className="text-sm text-slate-400 mt-3 font-medium leading-relaxed">For life-threatening emergencies or urgent flooding/gas issues, contact our 24/7 hotline.</p>
                         <div className="mt-8">
                             <p className="text-[10px] text-white/50 font-black uppercase tracking-widest">Rapid Response</p>
-                            <h3 className="text-2xl font-black text-gold-start mt-1">0800-ALE-911</h3>
+                            <h3 className="text-2xl font-black text-gold-start mt-1">0800-ALYS-911</h3>
                         </div>
                         <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl" />
                     </div>

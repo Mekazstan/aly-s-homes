@@ -63,8 +63,8 @@ export default function AdminDashboard() {
             {/* Executive Summary */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
-                    <h1 className="text-4xl font-extrabold text-slate-900 mb-2 tracking-tight">Executive Overview</h1>
-                    <p className="text-slate-500 font-bold">Estate Operations & Strategic Performance</p>
+                    <h1 className="text-4xl font-extrabold text-slate-900 mb-2 tracking-tight">Dashboard</h1>
+                    <p className="text-slate-500 font-bold">Estate Control & Strategic Performance</p>
                 </div>
                 <div className="flex items-center gap-3">
                     <button className="px-5 py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-900 text-sm font-bold rounded-xl border border-slate-200 transition-all">

@@ -33,8 +33,8 @@ export default function SignupPage() {
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af35] to-[#aa8b2c] mb-6 shadow-[0_0_30px_rgba(212,175,53,0.3)]">
                         <Home className="text-black w-8 h-8" />
                     </div>
-                    <h1 className="text-4xl font-bold text-slate-900 mb-2">
-                        Luxury Living Awaits
+                    <h1 className="text-4xl font-bold text-slate-900 mb-2 leading-tight">
+                        Alys Homes LTD
                     </h1>
                     <p className="text-slate-500 font-medium">Join the elite community of Abuja's finest estate</p>
                 </div>
